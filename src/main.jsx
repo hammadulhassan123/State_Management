@@ -5,15 +5,17 @@ import App2 from './App2.jsx'
 import './index.css'
 import store from './Redux/store.js'
 import { Provider } from 'react-redux'
+import App3 from './App3.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <App /> */}
-    <Provider store={store}>
+    {/* <Provider store={store}>
       <h1>Welcome to State Management by Redux</h1>
           <App2 />
-      </Provider>
+      </Provider> */}
+      <App3 />
 
   </React.StrictMode>,
 )
