@@ -1,12 +1,22 @@
 import React from 'react'
-import { useState } from 'react'
+import { useReducer } from 'react'
 import { createContext, useContext} from 'react';
 
+const reducer =(state,action)=>{
+  switch(action.type){
+    case "add":
+        return state + 1;
+    // case"sub":
+    //     return state - 1;
+    default:
+        return state;
+  }
+}; 
 
 const CounterContext = createContext(null);
 
 const CounterContextProvider = ({children})=>(
-    <CounterContext.Provider value={useState(0)}>
+    <CounterContext.Provider value={useReducer(reducer,0)}>
       {children}  
     </CounterContext.Provider>
 );
@@ -19,10 +29,12 @@ const Container = () =>(
 
 const AddOneButton= () =>{
 
-    const [, setCounter]= useContext(CounterContext);
+    const [, dispatch]= useContext(CounterContext);
     return(
       <div>
-          <button onClick={()=> setCounter((v)=>v+1)}>AddOne</button>
+          <button onClick={()=> dispatch({
+            type: "add"
+          })}>AddOne</button>
      </div>
     );
 }
@@ -32,7 +44,7 @@ const Counter =()=>{
     return (<div>Counter: {counter}</div>);
 }
 
-function CounterCTXUseState() {
+function CounterCTXUseReducer() {
   return (
     <CounterContextProvider>
       <Container/>
@@ -41,4 +53,4 @@ function CounterCTXUseState() {
   )
 }
 
-export default CounterCTXUseState
+export default CounterCTXUseReducer
