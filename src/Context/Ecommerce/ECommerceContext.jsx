@@ -5,7 +5,9 @@ import {
     useLogin,
     useLogout,
     useUser,
-} from './StoreZustand'
+    StoreContextProvider,
+
+} from './StoreContext'
 
 const LoginSection =() =>{
     const login = useLogin();
@@ -43,15 +45,21 @@ const CartCountSection=()=>{
     )
 }
 
-function ECommerceZustand() {
+function ContextPage() {
   return (
-    <>
+    <div>
         <LoginSection />
         <UserSection />
         <AddToCartSection />
         <CartCountSection />
-    </>
+    </div>
   )
 }
 
-export default ECommerceZustand
+export default function ContextPageWrapper(){
+    return(
+        <StoreContextProvider>
+           <ContextPage />
+        </StoreContextProvider>
+    )
+}
